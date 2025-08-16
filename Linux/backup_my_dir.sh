@@ -44,4 +44,9 @@ else
     exit 1
 fi
 
+# Delete backup that are older than 3 months.
+echo "[$TIMESTAMP] Finding directories older than 3 months for deletion." >> "$LOG_PATH"
+find "$BACKUP_BASE_DIR" -maxdepth 1 -type d -name "cloud_dir_backup-*" -mtime +90 -exec rm -rf {} \;
+echo "[$TIMESTAMP] Old backup directories deleted successfully." >> "$LOG_PATH"
+
 exit 0
